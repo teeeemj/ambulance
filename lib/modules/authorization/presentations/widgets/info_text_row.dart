@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:lesson1/core/config/app_colors.dart';
 import 'package:lesson1/core/config/app_fonts.dart';
 
@@ -21,9 +22,15 @@ class InfoTextRow extends StatelessWidget {
           image: image,
         ),
         const SizedBox(width: 18),
-        Text(
-          text,
-          style: AppFonts.s15w400.copyWith(color: AppColor.textColor),
+        Flexible(
+          child: Text(
+            text,
+            maxLines: 10,
+            overflow: TextOverflow.ellipsis,
+            style: AppFonts.s15w400.copyWith(
+              color: AppColor.textColor,
+            ),
+          ),
         )
       ],
     );
