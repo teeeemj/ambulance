@@ -7,6 +7,8 @@ import 'package:lesson1/core/config/routes/app_router.dart';
 import 'package:lesson1/modules/authorization/presentations/widgets/info_text_row.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../widgets/app_button.dart';
+
 @RoutePage()
 class InfoPage extends StatelessWidget {
   const InfoPage({super.key});
@@ -83,49 +85,6 @@ class InfoPage extends StatelessWidget {
               },
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class AppButton extends StatelessWidget {
-  const AppButton({
-    super.key,
-    required this.onPressed,
-    required this.title,
-  });
-
-  final Function() onPressed;
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-              8,
-            )),
-          ),
-          padding: MaterialStateProperty.all(
-            const EdgeInsets.only(
-              left: 121,
-              top: 17,
-              right: 123,
-              bottom: 16,
-            ),
-          ),
-          backgroundColor: MaterialStateProperty.all(AppColor.buttonBGColor),
-        ),
-        child: Text(
-          title,
-          style: AppFonts.s18w600.copyWith(
-            color: AppColor.textButtonColor,
-          ),
         ),
       ),
     );

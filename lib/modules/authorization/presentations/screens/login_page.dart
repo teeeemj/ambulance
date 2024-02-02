@@ -1,20 +1,29 @@
 import 'dart:math';
 
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:lesson1/core/config/app_colors.dart';
+import 'package:lesson1/core/config/app_consts.dart';
 import 'package:lesson1/core/config/app_fonts.dart';
-import 'package:lesson1/modules/authorization/presentations/screens/info_page.dart';
+import 'package:lesson1/core/config/routes/app_router.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
+import '../widgets/app_button.dart';
+
 @RoutePage()
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController controller = TextEditingController();
+  int code = 0;
+  @override
   Widget build(BuildContext context) {
-    int code = 0;
     return Scaffold(
       appBar: AppBar(
         bottom: const PreferredSize(
@@ -64,7 +73,7 @@ class LoginPage extends StatelessWidget {
               ],
               style: AppFonts.s17w600,
               keyboardType: TextInputType.phone,
-              controller: TextEditingController(),
+              controller: controller,
               decoration: const InputDecoration(
                 prefix: Text(
                   '0',
@@ -88,11 +97,23 @@ class LoginPage extends StatelessWidget {
             ),
             const Spacer(),
             AppButton(
-              onPressed: () {
+              onPressed: () async {
+                const storage = FlutterSecureStorage();
+                await storage.write(
+                    key: AppConsts.phone, value: controller.text);
+                print('${await storage.read(key: AppConsts.phone)}');
+
                 code = Random().nextInt(8999) + 1000;
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text(code.toString()),
+                    content: Text(
+                      code.toString(),
+                    ),
+                  ),
+                );
+                context.router.push(
+                  ConfirmRoute(
+                    code: code,
                   ),
                 );
               },
