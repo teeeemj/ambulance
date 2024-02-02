@@ -15,6 +15,16 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    ConfirmRoute.name: (routeData) {
+      final args = routeData.argsAs<ConfirmRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ConfirmPage(
+          key: args.key,
+          code: args.code,
+        ),
+      );
+    },
     InfoRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -27,13 +37,63 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LoginPage(),
       );
     },
+    ProfRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ProfScreen(),
+      );
+    },
     SplashRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const SplashScreen(),
       );
     },
+    UserCreateRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const UserCreateScreen(),
+      );
+    },
   };
+}
+
+/// generated route for
+/// [ConfirmPage]
+class ConfirmRoute extends PageRouteInfo<ConfirmRouteArgs> {
+  ConfirmRoute({
+    Key? key,
+    required int code,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ConfirmRoute.name,
+          args: ConfirmRouteArgs(
+            key: key,
+            code: code,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ConfirmRoute';
+
+  static const PageInfo<ConfirmRouteArgs> page =
+      PageInfo<ConfirmRouteArgs>(name);
+}
+
+class ConfirmRouteArgs {
+  const ConfirmRouteArgs({
+    this.key,
+    required this.code,
+  });
+
+  final Key? key;
+
+  final int code;
+
+  @override
+  String toString() {
+    return 'ConfirmRouteArgs{key: $key, code: $code}';
+  }
 }
 
 /// generated route for
@@ -65,6 +125,20 @@ class LoginRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ProfScreen]
+class ProfRoute extends PageRouteInfo<void> {
+  const ProfRoute({List<PageRouteInfo>? children})
+      : super(
+          ProfRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ProfRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [SplashScreen]
 class SplashRoute extends PageRouteInfo<void> {
   const SplashRoute({List<PageRouteInfo>? children})
@@ -74,6 +148,20 @@ class SplashRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SplashRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [UserCreateScreen]
+class UserCreateRoute extends PageRouteInfo<void> {
+  const UserCreateRoute({List<PageRouteInfo>? children})
+      : super(
+          UserCreateRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'UserCreateRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
